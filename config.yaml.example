@@ -1,13 +1,13 @@
 ---
-twitter_settings:
-    consumer_key : foo
-    consumer_secret : foo
-    oauth_token : foo
-    oauth_token_secret : foo
+facebook_settings:
+    consumer_key : foo1
+    consumer_secret : foo2
+    oauth_token : foo0red
+    oauth_token_secret : fooblue
 cookie_settings:
-    secret : foo
+    secret : a_long_string
 mysql_settings:
-    database : foo
-    user : foo
-    password : foo
+    database : dbname
+    user : username_string
+    password : password_string
     
