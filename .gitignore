@@ -1,0 +1,5 @@
+config.yaml
+log/*
+Gemfile.lock
+rubytest.rb
+users.db

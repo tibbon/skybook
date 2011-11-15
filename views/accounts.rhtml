@@ -1,0 +1,6 @@
+text: <b>Your authorized accounts:</b>
+<% @accounts.each do |account| -%>
+<% if account.current_account %><b><%= account.twitter_screen_name %></b> (active)
+<% else %><%= account.twitter_screen_name %> 
+<% end -%>
+<% end -%>

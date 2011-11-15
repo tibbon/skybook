@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Skype2Tweet Instructions</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <style type="text/css">
+      /* Override some defaults */
+      html, body {
+        background-color: #eee;
+      }
+      body {
+        padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+      }
+      .container > footer p {
+        text-align: center; /* center align it with the container */
+      }
+      .container {
+        width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+      }
+
+      /* The white background content wrapper */
+      .content {
+        background-color: #fff;
+        padding: 20px;
+        margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+
+      /* Page header tweaks */
+      .page-header {
+        background-color: #f5f5f5;
+        padding: 20px 20px 10px;
+        margin: -20px -20px 20px;
+      }
+
+      /* Styles you shouldn't keep as they are for displaying this base example only */
+      .content .span10,
+      .content .span4 {
+        min-height: 500px;
+      }
+      /* Give a quick and non-cross-browser friendly divider */
+      .content .span4 {
+        margin-left: 0;
+        padding-left: 19px;
+        border-left: 1px solid #eee;
+      }
+
+      .topbar .btn {
+        border: 0;
+      }
+
+    </style>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  </head>
+
+  <body>
+
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+          <h1>Skype2Tweet Instructions <small>built on Imvox API</small></h1>
+        </div>
+        <div class="row">
+          <div class="span10">
+            <h2>What is Skype2Tweet?</h2>
+			<p>Skype2Tweet lets you use Skype as a Twitter client!</p>
+			<ol>
+				<li>Add the <b>Imvox: Twitter</b> contact in Skype</li>
+				<li>Click on the link that the contact will send you</li>
+				<li>Authorize the app to Twitter</li>
+				<li>Now type .help in Skype to get all commands</li>
+			</ol>
+			<p>This is a demonstration of the upcoming <a href="http://developer.skype.com/public/skypekit">Skypekit</a> based API, developed by <a href="http://imvox.com">Ayalogic/Imvox</a> to allow web developers to access Skype.</p>
+          </div>
+          <div class="span4">
+            <h3>Commands</h3>
+			<ul>
+				<li><b>.help</b> - Shows a help document in Skype</li>
+				<li><b>.dmlist</b> - Returns the text of the last 5 DM messages you have received</li>
+				<li><b>.replies</b> - Returns the text of the last 5 mentions of you on Twitter.</li>
+				<li><b>.timeline</b> - Returns the last 5 tweets from people you are following. </li>
+				<li><b>.addacct</b> - Add additional Twitter account. </li>
+				<li><b>.removeacct <i>accountname</i></b> - Removes a Twitter account.</li>
+				<li><b>.user <i>accountname</i></b> - Toggles so outgoing messages go to a Twitter account.</li>
+			</ul>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>This page by David Fisher/<a href="http://tibbon.com">Tibbon</a> using <a href="http://imvox.com">Imvox API</a>. <a href="https://github.com/tibbon/Skype2Twitter">Code available on Github</a>.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
