@@ -1,6 +1,6 @@
 require "rubygems"
 require "bundler/setup"
-require "twitter"
+require "fb_graph"
 require 'sinatra'
 require "oauth"
 require 'crack/json'
