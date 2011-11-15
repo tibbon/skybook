@@ -29,7 +29,6 @@ unless DB.table_exists? :users
     primary_key :id
     String :skype_name
     String :access_token
-    String :access_secret
     String :fb_name
     Integer :fb_id
   end
@@ -38,11 +37,11 @@ end
 class User < Sequel::Model
 end
 
-configure do
-  fb_auth = FbGraph::Auth.new("202145019859718", "c5d027600e88eda6d1e5db7bec9c1f40")
-  #fb_auth.from_session_key('my-old-session-key')
-  fb_auth.access_token # => Rack::OAuth2::AccessToken
-end
+
+fb_auth = FbGraph::Auth.new("202145019859718", "c5d027600e88eda6d1e5db7bec9c1f40")
+#fb_auth.from_session_key('my-old-session-key')
+fb_auth.access_token # => Rack::OAuth2::AccessToken
+
 
 helpers do
   def check_command_word(skype_text)
@@ -67,16 +66,20 @@ get '/' do
 end
 
 get '/facebook_login' do
+  session[:user] = param[:user]
   client = fb_auth.client
   client.redirect_uri = "http://fbdev.imvox.com/callback"
-  redirect to client.authorization_uri(:scope => [:email, :read_stream, :offline_access])
+  redirect to client.authorization_uri(:scope => [:email, :offline_access])
 end
 
 
 get '/callback' do
+  user = session[:user]
+  client = fb_auth.client
   client.authorization_code = params[:code]
   access_token = client.access_token!  # => Rack::OAuth2::AccessToken
-  FbGraph::User.me(access_token).fetch # => FbGraph::User
+  User.create(:skype_name => user, :access_token => access_token)
+  FbGraph::User.me(access_token).fetch # => FbGraph::User. I think this just acts as a check here. 
   redirect to '/instructions'
 end
 
