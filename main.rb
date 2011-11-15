@@ -37,11 +37,8 @@ end
 class User < Sequel::Model
 end
 
-
 fb_auth = FbGraph::Auth.new("202145019859718", "c5d027600e88eda6d1e5db7bec9c1f40")
-#fb_auth.from_session_key('my-old-session-key')
 fb_auth.access_token # => Rack::OAuth2::AccessToken
-
 
 helpers do
   def check_command_word(skype_text)
@@ -116,7 +113,10 @@ post '/initialize' do
   current_user = User[:skype_name => @skype_name]
   facebook_client = FbGraph::User.me(current_user.access_token).fetch
   
-  facebook_client.update(@skype_text)
+  facebook_client.feed!(
+    :message => @skype_text
+  )
+  
   @return_text = @skype_text
   return erb :one_line_output
 
