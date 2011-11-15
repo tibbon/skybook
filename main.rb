@@ -78,8 +78,10 @@ get '/callback' do
   client = fb_auth.client
   client.authorization_code = params[:code]
   access_token = client.access_token!  # => Rack::OAuth2::AccessToken
-  User.create(:skype_name => user, :access_token => access_token)
-  FbGraph::User.me(access_token).fetch # => FbGraph::User. I think this just acts as a check here. 
+  unless User[:skype_name => user, :access_token => access_token]
+    User.create(:skype_name => user, :access_token => access_token)
+  end
+  FbGraph::User.me(access_token).fetch # => FbGraph::User. I think this just acts as a check here. Call again. 
   redirect to '/instructions'
 end
 
@@ -92,6 +94,7 @@ post '/initialize' do
   @skype_text = params[:text].to_s 
   @skype_name = params[:user].to_s
   @action = params[:action].to_s
+  @skype_text = fix_links(@skype_text)
   
   @command_word = check_command_word(@skype_text)
 
@@ -111,17 +114,11 @@ post '/initialize' do
   end
   
   current_user = User[:skype_name => @skype_name]
+  facebook_client = FbGraph::User.me(current_user.access_token).fetch
   
-  @skype_text = fix_links(@skype_text)
-  
-  # Put Facebook client here. 
- 
-  
-  client.update(@skype_text)
-  @return_text = "Got to the end"
+  facebook_client.update(@skype_text)
+  @return_text = @skype_text
   return erb :one_line_output
 
-  
-  
 end
 
