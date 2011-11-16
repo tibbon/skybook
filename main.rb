@@ -58,12 +58,10 @@ helpers do
   end
 end
 
-get '/' do
-  return "Coming soon"
-end
+
 
 get '/facebook_login' do
-  session[:user] = param[:user]
+  session[:user] = params[:user]
   client = fb_auth.client
   client.redirect_uri = "http://fbdev.imvox.com/callback"
   redirect to client.authorization_uri(:scope => [:email, :offline_access])
@@ -75,6 +73,7 @@ get '/callback' do
   client = fb_auth.client
   client.authorization_code = params[:code]
   access_token = client.access_token!  # => Rack::OAuth2::AccessToken
+  access_token = access_token.to_s
   unless User[:skype_name => user, :access_token => access_token]
     User.create(:skype_name => user, :access_token => access_token)
   end
@@ -87,7 +86,7 @@ get '/instructions' do
   return erb :instructions
 end
 
-post '/initialize' do
+post '/' do
   @skype_text = params[:text].to_s 
   @skype_name = params[:user].to_s
   @action = params[:action].to_s
