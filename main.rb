@@ -64,7 +64,7 @@ get '/facebook_login' do
   session[:user] = params[:user]
   client = fb_auth.client
   client.redirect_uri = "http://fbdev.imvox.com/callback"
-  redirect to client.authorization_uri(:scope => [:email, :offline_access])
+  redirect to client.authorization_uri(:scope => [:offline_access, :publish_stream])
 end
 
 
