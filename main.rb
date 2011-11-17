@@ -29,8 +29,6 @@ unless DB.table_exists? :users
     primary_key :id
     String :skype_name
     String :access_token
-    String :fb_name
-    Integer :fb_id
   end
 end
 
@@ -64,7 +62,7 @@ get '/facebook_login' do
   session[:user] = params[:user]
   client = fb_auth.client
   client.redirect_uri = "http://fbdev.imvox.com/callback"
-  redirect to client.authorization_uri(:scope => [:offline_access, :publish_stream])
+  redirect to client.authorization_uri(:scope => [:publish_stream, :status_update, :offline_access])
 end
 
 
@@ -93,7 +91,7 @@ post '/' do
   @skype_text = fix_links(@skype_text)
   
   @command_word = check_command_word(@skype_text)
-
+  
   if @command_word == ".help" 
     @return_text = "Help data"
     return erb :one_line_output
@@ -110,13 +108,17 @@ post '/' do
   end
   
   current_user = User[:skype_name => @skype_name]
+  begin
   facebook_client = FbGraph::User.me(current_user.access_token).fetch
-  
+  rescue FbGraph::InvalidToken
+    @return_text = "Click on the following link to authorize Skybook: http://fbdev.imvox.com/facebook_login?user=" + @skype_name.to_s
+    return erb :one_line_output
+  end
   facebook_client.feed!(
     :message => @skype_text
   )
   
-  @return_text = @skype_text
+  @return_text = "Posted to Facebook: " + @skype_text
   return erb :one_line_output
 
 end
