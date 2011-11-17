@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 gem "sinatra", "1.2.6"
-gem "twitter"
 gem "oauth"
+gem "fb_graph"
 gem 'crack'
 gem "sequel"
 gem "sqlite3"
