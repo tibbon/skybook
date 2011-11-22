@@ -3,3 +3,4 @@ log/*
 Gemfile.lock
 rubytest.rb
 users.db
+images/*
