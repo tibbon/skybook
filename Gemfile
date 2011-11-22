@@ -7,3 +7,4 @@ gem "sequel"
 gem "sqlite3"
 gem "mysql"
 gem "logger"
+gem 'uuid'
